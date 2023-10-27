@@ -38,6 +38,7 @@ public class employeeController {
         String jwt = JWTUtils.createJWT(jwtProperties.getPasswordKey(), jwtProperties.getTime(), map);
         EmployeeVO dto = new EmployeeVO();
         dto.setId(employee.getId());
+
         dto.setName(employee.getName());
         dto.setUserName(employee.getUsername());
         dto.setToken(jwt);  // 加入令牌
