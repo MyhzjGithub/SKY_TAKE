@@ -49,6 +49,13 @@
 			<artifactId>druid-spring-boot-starter</artifactId>
 			<version>1.2.8</version>
 		</dependency>
+<!--		filter过滤器依赖-->
+<!--		<dependency>-->
+<!--			<groupId>javax.servlet</groupId>-->
+<!--			<artifactId>javax.servlet-api</artifactId>-->
+<!--			<version>4.0.1</version>-->
+<!--		</dependency>-->
+
 
 	</dependencies>
 

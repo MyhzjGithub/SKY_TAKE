@@ -3,7 +3,10 @@ server:
 # mybatis日志配置
 mybatis:
   configuration:
+    # 驼峰命名
     cache-enabled: true
+    # 日志显示
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 spring:
   # 数据库配置
   datasource:
@@ -11,3 +14,18 @@ spring:
     url: jdbc:mysql://localhost:3306/sky_take_out?useSSL=false&allowPublicKeyRetrieval=true
     type: com.alibaba.druid.pool.DruidDataSource
     password: 622717
+# 配置阿里云oss文件上传
+aliyun:
+  oss:
+    endpoint: oss-cn-hangzhou.aliyuncs.com
+    accessKeyId: LTAI5tGTSMQvMupJWjn3bpeW
+    accessKeySecret: sWbJbgcl0OM7eyPoaLbjjPgfAv8xOg
+    bucketName: web-hezhaojie
+#jwt令牌有效时间
+Jwt:
+  # 设置jwt过期时间
+  time: 18000
+  # 设置jwt签名加密时使用的秘钥
+  PasswordKey: hzj
+  # 设置前端传递过来的令牌名称
+  token: token

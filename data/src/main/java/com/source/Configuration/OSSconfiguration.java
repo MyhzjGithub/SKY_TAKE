@@ -1,0 +1,28 @@
+package com.source.Configuration;
+
+
+import com.utils.ALIYUNYUN.applicationConfigProperties.AliOssProperties;
+import com.utils.ALIYUNYUN.AliOssUtil;
+import com.utils.JWT.applicationConfigProperties.jwtProperties;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+/**
+ * 用于配置阿里云文件上传
+ */
+@Configuration
+@Slf4j
+public class OSSconfiguration {
+    @Autowired
+    AliOssProperties aliOssProperties;
+
+
+    @Bean
+    public AliOssUtil aliOssUtil(){
+        log.info("配置阿里云文件上传...");
+        return new AliOssUtil(aliOssProperties.getEndpoint(),aliOssProperties.getAccessKeyId(),
+                aliOssProperties.getAccessKeySecret(),aliOssProperties.getBucketName());
+    }
+}
