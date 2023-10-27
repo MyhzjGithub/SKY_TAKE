@@ -1,8 +1,8 @@
 package com.source.interceptor.server;
 
-import com.utils.JWT.JWTUtils;
-import com.utils.JWT.applicationConfigProperties.jwtProperties;
-import com.utils.THREAD.BeanThread;
+import com.utils.JwtUtils.JWTUtils;
+import com.utils.JwtUtils.applicationConfigProperties.JwtProperties;
+import com.utils.ThreadUtils.BeanThread;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -20,7 +20,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 public class jwtInterceptor implements HandlerInterceptor {
 
     @Autowired
-    jwtProperties jwtProperties;
+    JwtProperties jwtProperties;
     /**
      *  校验JWT令牌
      * @param request   请求

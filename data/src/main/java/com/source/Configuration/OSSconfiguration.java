@@ -1,9 +1,8 @@
 package com.source.Configuration;
 
 
-import com.utils.ALIYUNYUN.applicationConfigProperties.AliOssProperties;
-import com.utils.ALIYUNYUN.AliOssUtil;
-import com.utils.JWT.applicationConfigProperties.jwtProperties;
+import com.utils.AliyunUtils.applicationConfigProperties.AliOssProperties;
+import com.utils.AliyunUtils.AliOssUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

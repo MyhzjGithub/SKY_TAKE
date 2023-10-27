@@ -3,10 +3,10 @@ server:
 # mybatis日志配置
 mybatis:
   configuration:
-    # 驼峰命名
-    cache-enabled: true
     # 日志显示
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    # 驼峰命名
+    map-underscore-to-camel-case: true
 spring:
   # 数据库配置
   datasource:
@@ -22,10 +22,10 @@ aliyun:
     accessKeySecret: sWbJbgcl0OM7eyPoaLbjjPgfAv8xOg
     bucketName: web-hezhaojie
 #jwt令牌有效时间
-Jwt:
+jwt:
   # 设置jwt过期时间
-  time: 18000
+  time: 1800000
   # 设置jwt签名加密时使用的秘钥
-  PasswordKey: hzj
+  PasswordKey: Hzj&2315912943@qq.com
   # 设置前端传递过来的令牌名称
   token: token
