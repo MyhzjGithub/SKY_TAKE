@@ -1,13 +1,14 @@
 package com.source.data.server.service.employee.impl;
 
-import com.pojo.Page.PAGE;
+
+import com.pojo.Page.Pages;
+import com.pojo.Query.employeeQuery;
 import com.pojo.employee.Employee;
-import com.pojo.employee.webEmployee.EmpQuery;
 import com.pojo.employee.webEmployee.Empinsert;
 import com.pojo.employee.webEmployee.EmployeeLogin;
 import com.pojo.employee.webEmployee.EmpeditPassword;
 import com.source.data.server.dao.employee.employeeMapper;
-import com.source.data.server.service.employee.employeeService;
+import com.source.data.server.service.employee.EmployeeService;
 import com.utils.ErrorUtils.message;
 import com.utils.ExceptionUtils.NullUserException;
 import com.utils.ExceptionUtils.PasswordException;
@@ -28,7 +29,7 @@ import java.util.List;
  * 员工接口service
  */
 @Service
-public class employeeClass implements employeeService {
+public class EmployeeClass implements EmployeeService {
     @Autowired
     private employeeMapper mapper;
 
@@ -65,13 +66,13 @@ public class employeeClass implements employeeService {
     }
 
     @Override
-    public PAGE<Employee> Page(EmpQuery empQuery) {
+    public Pages<Employee> Page(employeeQuery empQuery) {
         Integer count = mapper.getEmployeeCount();
         // 起始索引 = (查询页码 - 1) * 查询记录页
         Integer page = startPage.getStartPage(empQuery.getPage(), empQuery.getPageSize());
         empQuery.setPage(page);
         List<Employee> list = mapper.Page(empQuery);
-        return new PAGE<>(count, list);
+        return new Pages<>(count, list);
     }
 
     @Override
@@ -84,7 +85,7 @@ public class employeeClass implements employeeService {
         Employee employee = new Employee();
         BeanUtils.copyProperties(empinsert, employee);  // 属性拷贝
         employee.setStatus(defaultStatus.ONE);  // 设置状态
-        String password = DigestUtils.md5DigestAsHex(defaultPassword.DEFAULT.getBytes());   // 设置为默认密码
+        String password = DigestUtils.md5DigestAsHex(defaultPassword.DEFAULT_PASSWORD.getBytes());   // 设置为默认密码
         employee.setPassword(password);
         mapper.insertEmployee(employee);
     }

@@ -7,6 +7,7 @@ mybatis:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     # 驼峰命名
     map-underscore-to-camel-case: true
+    # data/server/dao/
 spring:
   # 数据库配置
   datasource:
@@ -18,8 +19,8 @@ spring:
 aliyun:
   oss:
     endpoint: oss-cn-hangzhou.aliyuncs.com
-    accessKeyId: LTAI5tGTSMQvMupJWjn3bpeW
-    accessKeySecret: sWbJbgcl0OM7eyPoaLbjjPgfAv8xOg
+    accessKeyId: LTAI5tJhXeHD5WLzg1YM1PAh
+    accessKeySecret: jbAmBCNcEjRzvI29q4NkuY7ze6SFOg
     bucketName: web-hezhaojie
 #jwt令牌有效时间
 jwt:

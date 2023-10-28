@@ -1,10 +1,12 @@
 package com.source.data.server.controller.employee;
 
-import com.pojo.Page.PAGE;
+
+import com.pojo.Page.Pages;
+import com.pojo.Query.employeeQuery;
 import com.pojo.RESULT.Result;
 import com.pojo.employee.Employee;
 import com.pojo.employee.webEmployee.*;
-import com.source.data.server.service.employee.employeeService;
+import com.source.data.server.service.employee.EmployeeService;
 import com.utils.JwtUtils.JWTMessage;
 import com.utils.JwtUtils.JWTUtils;
 import com.utils.JwtUtils.applicationConfigProperties.JwtProperties;
@@ -24,7 +26,7 @@ import java.util.Map;
 @RequestMapping("/admin/employee")
 public class employeeController {
     @Autowired
-    private employeeService empService;
+    private EmployeeService empService;
     @Autowired
     private JwtProperties jwtProperties;
 
@@ -59,9 +61,9 @@ public class employeeController {
     }
 
     @GetMapping("/page")
-    public Result page(EmpQuery empQuery){
+    public Result page(employeeQuery empQuery){
         log.info("分页查询 {}",empQuery);
-        PAGE<Employee> page = empService.Page(empQuery);
+        Pages<Employee> page = empService.Page(empQuery);
         return Result.success(page);
     }
     @PostMapping

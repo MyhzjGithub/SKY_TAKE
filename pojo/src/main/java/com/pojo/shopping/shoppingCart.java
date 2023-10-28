@@ -1,10 +1,9 @@
 package com.pojo.shopping;
 
-import com.pojo.dish.dishFlavor;
+import com.pojo.dish.DishFlavor;
 import lombok.Data;
 
 import java.math.BigDecimal;
-import java.security.spec.RSAOtherPrimeInfo;
 import java.time.LocalDateTime;
 
 /**
@@ -18,7 +17,7 @@ public class shoppingCart {
     private Long userId;
     private Long dishId;
     private Long setmealId;
-    private dishFlavor dishFlavor;
+    private DishFlavor dishFlavor;
     private Integer number; // 数量
     private BigDecimal amount;  // 金额
     private LocalDateTime createTime;   // 创建时间

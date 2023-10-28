@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
  * 菜品实体类
  */
 @Data
-public class dish {
+public class Dish {
     private Long id;
     private String name;
     private Long categoryId;

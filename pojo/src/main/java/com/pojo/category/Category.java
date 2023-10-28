@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
  *分类管理 -- 菜品 & 套餐
  */
 @Data
-public class category {
+public class Category {
     private Long id;
     private Integer type;
     private String name;

@@ -8,14 +8,17 @@ import com.aliyun.oss.OSSException;
 import com.utils.AliyunUtils.applicationConfigProperties.AliOssProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.io.ByteArrayInputStream;
 
 @Data
 @AllArgsConstructor
 @Slf4j
+@NoArgsConstructor
 public class AliOssUtil {
     @Autowired
     private AliOssProperties aliOssProperties;

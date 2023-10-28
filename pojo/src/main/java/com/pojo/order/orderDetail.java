@@ -1,11 +1,9 @@
 package com.pojo.order;
 
-import com.pojo.dish.dishFlavor;
+import com.pojo.dish.DishFlavor;
 import lombok.Data;
 
 import java.math.BigDecimal;
-import java.security.spec.RSAOtherPrimeInfo;
-import java.util.List;
 
 /**
  *订单明细表
@@ -18,7 +16,7 @@ public class orderDetail {
     private Long orderId;   // 商品对应的订单id
     private Long dishId;    // 商品对应的菜品id
     private Long setmealId; // 商品对应的套餐id
-    private dishFlavor dishFlavor;    // 商品对应的菜品口味信息
+    private DishFlavor dishFlavor;    // 商品对应的菜品口味信息
     private Integer number; // 商品数量
     private BigDecimal amount;  // 商品单价金额
 }

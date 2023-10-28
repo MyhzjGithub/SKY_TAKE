@@ -1,13 +1,14 @@
 package com.source.data.server.service.employee;
 
-import com.pojo.Page.PAGE;
+
+import com.pojo.Page.Pages;
+import com.pojo.Query.employeeQuery;
 import com.pojo.employee.Employee;
-import com.pojo.employee.webEmployee.EmpQuery;
 import com.pojo.employee.webEmployee.Empinsert;
 import com.pojo.employee.webEmployee.EmployeeLogin;
 import com.pojo.employee.webEmployee.EmpeditPassword;
 
-public interface employeeService {
+public interface EmployeeService {
 
     /**
      * 根据用户名查询员工信息
@@ -22,7 +23,7 @@ public interface employeeService {
     /**
      * 分页查询
      */
-    PAGE<Employee> Page(EmpQuery empQuery);
+    Pages<Employee> Page(employeeQuery empQuery);
 
     /**
      * 根据id查询员工信息

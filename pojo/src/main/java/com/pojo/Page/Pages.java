@@ -13,7 +13,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PAGE<T> {
-    private Integer total;
-    private List<T> records;
+public class Pages<T> {
+    private Integer total;  // 总数
+    private List<T> records;    // 数据
 }

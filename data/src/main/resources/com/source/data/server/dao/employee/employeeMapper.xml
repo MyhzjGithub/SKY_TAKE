@@ -15,7 +15,7 @@
     </select>
 
     <select id="Page" resultType="com.pojo.employee.Employee">
-        <include refid="SELECT"></include>
+        <include refid="SELECT"/>
         <where>
             <if test="name != null"> name = #{name}</if>
         </where>

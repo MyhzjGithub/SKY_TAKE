@@ -1,7 +1,7 @@
 package com.source.data.server.dao.employee;
 
+import com.pojo.Query.employeeQuery;
 import com.pojo.employee.Employee;
-import com.pojo.employee.webEmployee.EmpQuery;
 import com.utils.Annotation.AutoFill;
 import com.utils.typeUtils.TYPE;
 import org.apache.ibatis.annotations.Mapper;
@@ -36,7 +36,7 @@ public interface employeeMapper {
      * @param empQuery
      * @return
      */
-    List<Employee> Page(EmpQuery empQuery);
+    List<Employee> Page(employeeQuery empQuery);
 
     /**
      * 新增员工信息
