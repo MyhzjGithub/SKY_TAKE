@@ -15,5 +15,11 @@ public interface DishFlavorService {
      * 修改口味信息
      * @param flavors
      */
-    void updateDishFlavor(List<DishFlavor> flavors);
+    void insertDishFlavor(List<DishFlavor> flavors);
+
+    /**
+     * 根据菜品id删除口味信息
+     * @param id
+     */
+    void deleteDishId(Long id);
 }

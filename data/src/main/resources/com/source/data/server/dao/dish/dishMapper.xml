@@ -6,6 +6,7 @@
     <sql id="SELECT"> select id, name, category_id, price, image, description, status, create_time, update_time, create_user, update_user from dish</sql>
 
 
+
     <select id="Pages" resultType="com.pojo.dish.WEBdish.Dish_page">
         <include refid="SELECT"/>
         <where>
@@ -29,4 +30,10 @@
         </set>
         where id = #{id}
     </update>
+
+    <!--获取数据库自动生成的id 并且返回 封装到参数体类的id属性-->
+    <insert id="insertDish" useGeneratedKeys="true" keyProperty="id">
+        insert into dish (name, category_id, price, image, description, status, create_time, update_time, create_user, update_user)
+        VALUES (#{name},#{categoryId},#{price},#{image},#{description},#{status},#{createTime},#{updateTime},#{createUser},#{updateUser})
+    </insert>
 </mapper>

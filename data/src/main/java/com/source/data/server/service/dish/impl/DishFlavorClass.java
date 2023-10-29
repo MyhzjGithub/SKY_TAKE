@@ -28,7 +28,7 @@ public class DishFlavorClass implements DishFlavorService {
      */
     @Override
     @Transactional
-    public void updateDishFlavor(List<DishFlavor> flavors) {
+    public void insertDishFlavor(List<DishFlavor> flavors) {
         if (flavors == null || flavors.size() == 0){   // 没有数据
             return;
         }
@@ -36,5 +36,10 @@ public class DishFlavorClass implements DishFlavorService {
         mapper.deleteDishFlavorId(flavors.get(0).getDishId());
         // 新增菜品的口味数据
         mapper.insertDishFlavor(flavors);
+    }
+
+    @Override
+    public void deleteDishId(Long id) {
+        mapper.deleteDishFlavorId(id);
     }
 }

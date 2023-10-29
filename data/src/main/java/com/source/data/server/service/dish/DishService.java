@@ -3,8 +3,11 @@ package com.source.data.server.service.dish;
 
 import com.pojo.Page.Pages;
 import com.pojo.Query.dishQuery;
+import com.pojo.dish.Dish;
 import com.pojo.dish.WEBdish.Dish_page;
 import com.pojo.dish.WEBdish.Dish_public;
+
+import java.util.List;
 
 public interface DishService {
     /**
@@ -26,4 +29,28 @@ public interface DishService {
      * @param dishPublic
      */
     void updateDish(Dish_public dishPublic);
+
+    /**
+     * 新增菜品
+     */
+    void insertDish(Dish_public dishPublic);
+
+    /**
+     * 修改菜品状态
+     * @param id
+     */
+    void setDishStatus( Long id);
+
+    /**
+     * 批量删除
+     * @param ids
+     */
+    void deleteDish(Long[] ids);
+
+    /**
+     * 根据分类id查询菜品信息
+     * @param categoryId
+     * @return
+     */
+    List<Dish> selectCategoryId(Long categoryId);
 }
