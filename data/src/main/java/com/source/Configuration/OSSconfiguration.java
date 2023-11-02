@@ -21,7 +21,6 @@ public class OSSconfiguration {
     @Bean
     public AliOssUtil aliOssUtil(){
         log.info("配置阿里云文件上传...");
-        return new AliOssUtil(aliOssProperties.getEndpoint(),aliOssProperties.getAccessKeyId(),
-                aliOssProperties.getAccessKeySecret(),aliOssProperties.getBucketName());
+        return new AliOssUtil();
     }
 }

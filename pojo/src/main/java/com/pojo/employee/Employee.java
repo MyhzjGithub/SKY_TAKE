@@ -21,6 +21,4 @@ public class Employee {
     private LocalDateTime updateTime;
     private Long createUser;
     private Long updateUser;
-
-
 }

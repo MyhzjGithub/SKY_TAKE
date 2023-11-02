@@ -13,11 +13,18 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @Data
 public class JwtProperties {
+    // server 服务端令牌信息
+    private Long server_time;  // 令牌过期时间
 
-    private Long time;  // 令牌过期时间
+    private String server_PasswordKey; // 令牌密钥
 
-    private String PasswordKey; // 令牌密钥
+    private String server_token;   // 令牌名称
 
-    private String token;   // 令牌名称
+    // client客户端
+    private Long client_time; // 令牌过期时间
+
+    private String client_PasswordKey; // 令牌密钥
+
+    private String client_token;  // 令牌名称
 
 }

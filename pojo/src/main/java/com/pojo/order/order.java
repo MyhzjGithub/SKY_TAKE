@@ -2,6 +2,7 @@ package com.pojo.order;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -9,7 +10,7 @@ import java.time.LocalDateTime;
  * 订单管理类
  */
 @Data
-public class order {
+public class order  implements Serializable {
     private Long id;    // 订单id
     private String number;  // 订单号
     private Integer status; // 订单状态
