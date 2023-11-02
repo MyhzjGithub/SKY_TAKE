@@ -3,14 +3,13 @@ package com.source.data.server.service.setmeal.impl;
 import com.pojo.Page.Pages;
 import com.pojo.Query.setmealQuery;
 import com.pojo.category.Category;
-import com.pojo.setmeal.WEBsetmeal.SetmealPage;
-import com.pojo.setmeal.WEBsetmeal.Setmeal_Insert;
-import com.pojo.setmeal.WEBsetmeal.Setmeal_Select;
-import com.pojo.setmeal.WEBsetmeal.Setmeal_update;
+import com.pojo.dish.Dish;
+import com.pojo.setmeal.WEBsetmeal.*;
 import com.pojo.setmeal.setmeal;
 import com.pojo.setmeal.setmealDish;
 import com.source.data.server.dao.setmeal.SetmealMapper;
 import com.source.data.server.service.category.CategoryService;
+import com.source.data.server.service.dish.DishService;
 import com.source.data.server.service.setmeal.SetmealDishService;
 import com.source.data.server.service.setmeal.SetmealService;
 import com.utils.StatusUtils.DefaultStatus;
@@ -21,6 +20,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Service
 public class SetmealClass implements SetmealService {
@@ -30,6 +31,8 @@ public class SetmealClass implements SetmealService {
     private CategoryService categoryService;
     @Autowired
     private SetmealMapper mapper;
+    @Autowired
+    private DishService dishService;
 
     @Override
     public Pages<SetmealPage> Page(setmealQuery query) {
@@ -99,5 +102,26 @@ public class SetmealClass implements SetmealService {
     @Override
     public List<setmeal> selectCategoryId(Long categoryId) {
         return mapper.selectCategoryId(categoryId,DefaultStatus.ONE);
+    }
+
+    @Override
+    public List<Setmeal_data> selectDishID(Long setmealId) {
+        // 先获取套餐中的菜品id
+        List<Long> list = setmealDishService.getDishID(setmealId);
+
+        // 根据菜品id查询菜品表获取对应的菜品信息
+        List<Dish> dishList  = dishService.getDishId(list);
+
+        // 进行转换 变为需要的集合
+        List<Setmeal_data> collect = dishList.stream().map(dish -> {
+            Setmeal_data setmealData = new Setmeal_data();
+            setmealData.setName(dish.getName());
+            setmealData.setCopies(1);   // TODO: 2023/11/2 菜品份数需要从套餐菜品关系表中获取 由于都是1 则直接填写了
+            setmealData.setDescription(dish.getDescription());
+            setmealData.setImage(dish.getImage());
+            return setmealData;
+        }).collect(Collectors.toList());
+        
+        return collect;
     }
 }

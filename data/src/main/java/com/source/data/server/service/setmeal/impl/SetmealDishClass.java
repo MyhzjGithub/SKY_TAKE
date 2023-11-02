@@ -35,4 +35,9 @@ public class SetmealDishClass implements SetmealDishService {
         }
         mapper.insert(setmealDishes);   // 在批量添加菜品
     }
+
+    @Override
+    public List<Long> getDishID(Long setmealId) {
+        return mapper.getDishID(setmealId);
+    }
 }

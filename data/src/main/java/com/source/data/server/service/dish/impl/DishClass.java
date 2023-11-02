@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -58,6 +59,16 @@ public class DishClass implements DishService {
         dishPublic.setCategoryName(category.getName());
         dishPublic.setFlavors(dishFlavor);
         return dishPublic;
+    }
+
+    @Override
+    public List<Dish> getDishId(List<Long> dishId) {
+        List<Dish> list = new ArrayList<>();
+        for (Long id : dishId) {
+            Dish dish = mapper.getDishID(id);
+            list.add(dish);
+        }
+        return list;
     }
 
     @Override

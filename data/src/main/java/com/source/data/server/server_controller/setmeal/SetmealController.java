@@ -36,7 +36,7 @@ public class SetmealController {
     }
 
     @PostMapping
-    @CachePut(value = "Setmeal",key = "#data.id")
+    @CachePut(value = "server-Setmeal",key = "#data.id")
     public Result insert(@RequestBody Setmeal_Insert data){
         log.info("新增套餐数据: {}",data);
         service.insertSetmeal(data);
@@ -44,7 +44,7 @@ public class SetmealController {
     }
 
     @PostMapping("/status/{status}")
-    @CacheEvict(value = "Setmeal" , allEntries = true)
+    @CacheEvict(value = {"server-Setmeal","client-Setmeal"} , allEntries = true)
     public Result setStatus(@PathVariable("status")Integer status, Long id){
         log.info("修改id为:{} 的套餐状态为 {}",id, status.equals(DefaultStatus.ZERO) ? "停售" : "启售");
         service.updateStatus(status,id);
@@ -52,7 +52,7 @@ public class SetmealController {
     }
 
     @DeleteMapping
-    @CacheEvict(value = "Setmeal",key = "#ids")
+    @CacheEvict(value = {"server-Setmeal","client-Setmeal"},allEntries = true)
     public Result delSetmeal(Long[] ids){
         log.info("删除id为 : {} 的套餐", Arrays.toString(ids));
         service.delete(ids);
@@ -60,7 +60,7 @@ public class SetmealController {
     }
 
     @GetMapping("/{id}")
-    @Cacheable(value = "Setmeal",key = "#id")
+    @Cacheable(value = "server-Setmeal",key = "#id")
     public Result getSetmealId(@PathVariable("id") Long id){
         log.info("查询id为: {} 的套餐信息",id);
         Setmeal_Select setmealSelect = service.selectID(id);
@@ -68,7 +68,7 @@ public class SetmealController {
     }
 
     @PutMapping
-    @CacheEvict(value = "Setmeal",allEntries = true)
+    @CacheEvict(value = {"server-Setmeal","client-Setmeal"},allEntries = true)
     public Result updateSetmeal(@RequestBody Setmeal_update setmealUpdate){
         log.info("修改套餐数据 data = {}",setmealUpdate);
         service.updateSetmeal(setmealUpdate);

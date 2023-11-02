@@ -2,10 +2,7 @@ package com.source.data.server.service.setmeal;
 
 import com.pojo.Page.Pages;
 import com.pojo.Query.setmealQuery;
-import com.pojo.setmeal.WEBsetmeal.SetmealPage;
-import com.pojo.setmeal.WEBsetmeal.Setmeal_Insert;
-import com.pojo.setmeal.WEBsetmeal.Setmeal_Select;
-import com.pojo.setmeal.WEBsetmeal.Setmeal_update;
+import com.pojo.setmeal.WEBsetmeal.*;
 import com.pojo.setmeal.setmeal;
 
 import java.util.List;
@@ -56,4 +53,11 @@ public interface SetmealService {
      * @return
      */
     List<setmeal> selectCategoryId(Long categoryId);
+
+    /**
+     * 根据套餐id获取对应的菜品信息
+     * @param setmealId
+     * @return
+     */
+    List<Setmeal_data> selectDishID(Long setmealId);
 }

@@ -35,7 +35,7 @@ public class DishController {
     }
 
     @GetMapping("/{id}")
-    @Cacheable(value = "DishCache" , key = "#id")    // 添加查询缓存
+    @Cacheable(value = "server-DishCache" , key = "#id")    // 添加查询缓存
     public Result SelectDishId(@PathVariable("id") Long id){
         log.info("查询id为 {} 的数据",id);
         Dish_public dishPublic = service.getDishId(id);
@@ -43,14 +43,14 @@ public class DishController {
     }
 
     @PutMapping
-    @CacheEvict(value = "DishCache",allEntries = true)  // 清理全部缓存
+    @CacheEvict(value = {"server-DishCache","client-Dish"},allEntries = true)  // 清理全部缓存
     public Result updateDish(@RequestBody Dish_public dishPublic){
         log.info("修改数据 : 修改的数据为{}",dishPublic);
         service.updateDish(dishPublic);
         return Result.success();
     }
     @PostMapping
-    @CachePut(value = "DishCache",key = "#dishPublic.id")    // 添加数据到缓存
+    @CachePut(value = "server-DishCache",key = "#dishPublic.id")    // 添加数据到缓存
     public Result insertDish(@RequestBody Dish_public dishPublic){
         log.info("新增菜品 : {}",dishPublic);
         service.insertDish(dishPublic);
@@ -58,7 +58,7 @@ public class DishController {
     }
 
     @PostMapping("/status/{status}")    // todo 不知道为什么前端传递的status永远都是0
-    @CacheEvict(value = "DishCache",allEntries = true)  // 清理全部缓存
+    @CacheEvict(value = {"server-DishCache","client-Dish"},allEntries = true)  // 清理全部缓存
     public Result setStatus( Long id){
 //        log.info("修改id为: {} 的菜品状态为 {}",id,status.equals(defaultStatus.ONE) ? "启售" : "停售");
         log.info("修改id为: {} 的菜品状态",id);
@@ -66,14 +66,14 @@ public class DishController {
         return Result.success();
     }
     @DeleteMapping
-    @CacheEvict(value = "DishCache",allEntries = true)  // 清理全部缓存
+    @CacheEvict(value = {"server-DishCache","client-Dish"},allEntries = true)  // 清理全部缓存
     public Result delDish(Long[] ids){
         log.info("删除id为 : {} 的菜品", Arrays.toString(ids));
         service.deleteDish(ids);
         return Result.success();
     }
     @GetMapping("/list")
-    @Cacheable(value = "DishCache" , key = "#categoryId")    // 添加查询缓存
+    @Cacheable(value = "server-DishCache" , key = "#categoryId")    // 添加查询缓存
     public Result selectCategoryIdGetDish(Long categoryId){
         log.info("查询分类id为: {}的菜品数据",categoryId);
         List<Dish> list = service.selectCategoryId(categoryId);

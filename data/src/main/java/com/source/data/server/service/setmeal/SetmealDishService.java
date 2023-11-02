@@ -29,4 +29,11 @@ public interface SetmealDishService {
      * @param setmealDishes
      */
     void updateSetmealDish(List<setmealDish> setmealDishes);
+
+    /**
+     * 根据套餐id返回套餐对应的菜品id
+     * @param setmealId
+     * @return 菜品的id
+     */
+    List<Long> getDishID(Long setmealId);
 }

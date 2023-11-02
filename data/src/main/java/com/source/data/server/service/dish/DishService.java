@@ -25,6 +25,13 @@ public interface DishService {
     Dish_public getDishId(Long id);
 
     /**
+     * 根据id查询菜品详情信息
+     * @param dishId
+     * @return
+     */
+    List<Dish> getDishId(List<Long> dishId);
+
+    /**
      * 修改数据
      * @param dishPublic
      */
