@@ -3,6 +3,8 @@ package com.pojo.dish.WEBdish;
 import lombok.Data;
 import lombok.ToString;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
@@ -10,7 +12,9 @@ import java.time.LocalDateTime;
  */
 @Data
 @ToString
-public class Dish_page {
+public class Dish_page  implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
     private Long id;    // 菜品id
     private String name;    // 名称
     private Long categoryId;    // 分类id

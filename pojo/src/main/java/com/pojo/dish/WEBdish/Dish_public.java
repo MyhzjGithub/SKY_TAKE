@@ -4,6 +4,8 @@ import com.pojo.dish.DishFlavor;
 import lombok.Data;
 import lombok.ToString;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -12,7 +14,9 @@ import java.util.List;
  */
 @Data
 @ToString
-public class Dish_public {
+public class Dish_public  implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
     private Long categoryId;
     private String categoryName;
     private String description;

@@ -1,6 +1,7 @@
 package com.source.ExceptionHandler;
 
 import com.pojo.RESULT.Result;
+import com.utils.ErrorUtils.Message;
 import com.utils.ExceptionUtils.NullUserException;
 import com.utils.ExceptionUtils.PasswordException;
 import com.utils.ExceptionUtils.UsernameException;
@@ -8,7 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import java.sql.SQLException;
+import javax.security.auth.login.LoginException;
 
 /**
  * 全局异常处理器
@@ -37,11 +38,17 @@ public class My_ExceptionHandler {
         log.info("捕获到: UsernameException异常  异常信息为 : {}",message);
         return Result.error(message);
     }
+    @ExceptionHandler(LoginException.class)
+    public Result Login(LoginException e){
+        String message = e.getMessage();    // 获取错误信息
+        log.info("捕获到: LoginException异常  异常信息为 : {}",message);
+        return Result.error(message);
+    }
 
     @ExceptionHandler(Exception.class)
     public Result EXCEPTION(Exception e){
         log.info("无法捕获到当前异常 : 异常信息为 {}",e.getMessage());
         e.printStackTrace();    // 输出异常信息到控制台
-        return Result.error("网络连接异常 请稍后再试...");
+        return Result.error(Message.NETWORK_ERROR);
     }
 }

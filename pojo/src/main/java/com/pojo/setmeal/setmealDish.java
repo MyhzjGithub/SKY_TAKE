@@ -2,13 +2,17 @@ package com.pojo.setmeal;
 
 import lombok.Data;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
  * 套餐菜品关系类
  */
 @Data
-public class setmealDish {
+public class setmealDish  implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
     private Long id;
     private Long setmealId;
     private Long dishId;

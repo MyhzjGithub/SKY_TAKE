@@ -1,16 +1,16 @@
 package com.source.Configuration;
 
-import com.source.interceptor.server.jwtInterceptor;
+
+import com.source.interceptor.client.clientjwtInterceptor;
+import com.source.interceptor.server.serverjwtInterceptor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.web.method.support.HandlerMethodReturnValueHandler;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.List;
 
@@ -21,16 +21,22 @@ import java.util.List;
 @Slf4j
 public class WEBintegceptor extends WebMvcConfigurationSupport {
     @Autowired
-    private jwtInterceptor jwtInterceptor;
+    private serverjwtInterceptor serverjwtInterceptor;
+    @Autowired
+    private clientjwtInterceptor clientjwtInterceptor;
     /**
      * 配置自定义拦截器
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         log.info("开始注册自定义拦截器...");
-        registry.addInterceptor(jwtInterceptor)
+        registry.addInterceptor(serverjwtInterceptor)   // 配置服务端拦截器
                 .addPathPatterns("/admin/**")   // 拦截server所有的请求
                 .excludePathPatterns("/admin/employee/login");  // 放行登入接口
+        registry.addInterceptor(clientjwtInterceptor)   // 配置客户端拦截器
+                .addPathPatterns("/user/**")
+                .excludePathPatterns("/user/user/login")
+                .excludePathPatterns("/user/shop/status");  // 放行获取店铺状态的
     }
     /**
      * 设置静态资源映射

@@ -7,17 +7,18 @@ import com.pojo.dish.Dish;
 import com.pojo.dish.DishFlavor;
 import com.pojo.dish.WEBdish.Dish_page;
 import com.pojo.dish.WEBdish.Dish_public;
-import com.source.data.server.dao.dish.dishMapper;
+import com.source.data.server.dao.dish.DishMapper;
 import com.source.data.server.service.category.CategoryService;
 import com.source.data.server.service.dish.DishFlavorService;
 import com.source.data.server.service.dish.DishService;
 import com.utils.PageUtils.startPage;
-import com.utils.StatusUtils.defaultStatus;
+import com.utils.StatusUtils.DefaultStatus;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -26,7 +27,7 @@ import java.util.List;
 @Service
 public class DishClass implements DishService {
     @Autowired
-    private dishMapper mapper;
+    private DishMapper mapper;
     @Autowired
     private DishFlavorService dishFlavorService;
     @Autowired
@@ -75,7 +76,7 @@ public class DishClass implements DishService {
     public void insertDish(Dish_public dishPublic) {
         Dish dish = new Dish();
         BeanUtils.copyProperties(dishPublic, dish);
-        dish.setStatus(defaultStatus.ZERO); // 默认为禁用
+        dish.setStatus(DefaultStatus.ZERO); // 默认为禁用
         mapper.insertDish(dish);
         List<DishFlavor> flavors = dishPublic.getFlavors();
         for (DishFlavor flavor : flavors) {
@@ -88,10 +89,10 @@ public class DishClass implements DishService {
     @Transactional
     public void setDishStatus(Long id) {
         Dish dish = mapper.getDishID(id);   // 先根据当前id获取菜品信息
-        if (dish.getStatus().equals(defaultStatus.ZERO)){   // 如果是 等于 0 修改为 1
-            mapper.setDishStatus(defaultStatus.ONE, dish.getId());
+        if (dish.getStatus().equals(DefaultStatus.ZERO)){   // 如果是 等于 0 修改为 1
+            mapper.setDishStatus(DefaultStatus.ONE, dish.getId(), LocalDateTime.now());
         }else {
-            mapper.setDishStatus(defaultStatus.ZERO, dish.getId());
+            mapper.setDishStatus(DefaultStatus.ZERO, dish.getId(), LocalDateTime.now());
         }
     }
 
@@ -107,7 +108,12 @@ public class DishClass implements DishService {
 
     @Override
     public List<Dish> selectCategoryId(Long categoryId) {
-        List<Dish> list = mapper.getCategoryId(categoryId);
+        List<Dish> list = mapper.getCategoryId(categoryId,DefaultStatus.ONE);   // 只返回启用状态的
         return list;
+    }
+
+    @Override
+    public Dish getDishName(String name) {
+        return mapper.getDishName(name);
     }
 }

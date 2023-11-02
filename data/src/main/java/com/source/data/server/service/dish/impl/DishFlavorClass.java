@@ -1,7 +1,7 @@
 package com.source.data.server.service.dish.impl;
 
 import com.pojo.dish.DishFlavor;
-import com.source.data.server.dao.dish.dishFlavorMapper;
+import com.source.data.server.dao.dish.DishFlavorMapper;
 import com.source.data.server.service.dish.DishFlavorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,7 @@ import java.util.List;
 @Service
 public class DishFlavorClass implements DishFlavorService {
     @Autowired
-    private dishFlavorMapper mapper;
+    private DishFlavorMapper mapper;
 
     @Override
     public List<DishFlavor> getDishId(Long id) {

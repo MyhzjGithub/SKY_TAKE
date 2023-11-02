@@ -15,6 +15,15 @@ spring:
     url: jdbc:mysql://localhost:3306/sky_take_out?useSSL=false&allowPublicKeyRetrieval=true
     type: com.alibaba.druid.pool.DruidDataSource
     password: 622717
+  cache:
+    type: redis   # 指定redis作为缓存
+  # 配置rides缓存
+  data:
+    redis:
+      port: 6379
+      database: 0
+      host: localhost
+      connect-timeout: 18000
 # 配置阿里云oss文件上传
 aliyun:
   oss:
@@ -24,9 +33,22 @@ aliyun:
     bucketName: web-hezhaojie
 #jwt令牌有效时间
 jwt:
+  # server 服务端
   # 设置jwt过期时间
-  time: 1800000
+  server_time: 18000000
   # 设置jwt签名加密时使用的秘钥
-  PasswordKey: Hzj&2315912943@qq.com
+  server_PasswordKey: Hzj&2315912943@qq.com
   # 设置前端传递过来的令牌名称
-  token: token
+  server_token: token
+
+  # client 客户端
+  # 设置jwt过期时间
+  client_time: 18000000
+  # 设置jwt签名加密时使用的秘钥
+  client_PasswordKey: Hzj&13170896221@qq.com
+  # 设置前端传递过来的令牌名称
+  client_token: authentication
+# 微信小程序 配置
+wx:
+  AppID: wxdd85d6736e2e8b6e # 小程序appid
+  Secret: b3ee17ad5155f90acc6f68eb11ac60f0  # 小程序密钥

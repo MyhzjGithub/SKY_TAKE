@@ -39,7 +39,7 @@ public interface CategoryService {
      * @param type
      * @return
      */
-    List<Category> selectCategory(Integer type);
+    List<Category> selectCategoryType(Integer type);
 
     /**
      * 修改分类

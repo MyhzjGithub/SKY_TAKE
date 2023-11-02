@@ -3,13 +3,14 @@ package com.pojo.order;
 import com.pojo.dish.DishFlavor;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
  *订单明细表
  */
 @Data
-public class orderDetail {
+public class orderDetail  implements Serializable {
     private Long id;    // 明细id
     private String name;    // 商品名称
     private String image;   // 商品图片
