@@ -1,7 +1,7 @@
 package com.source.data.server.server_controller.setmeal;
 
 import com.pojo.Page.Pages;
-import com.pojo.Query.setmealQuery;
+import com.pojo.Query.SetmealQuery;
 import com.pojo.RESULT.Result;
 import com.pojo.setmeal.WEBsetmeal.SetmealPage;
 import com.pojo.setmeal.WEBsetmeal.Setmeal_Insert;
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Arrays;
 
 /**
- * 套餐控制层
+ * web端 : 套餐模块
  */
 @RestController("server_SetmealController")
 @Slf4j
@@ -29,7 +29,7 @@ public class SetmealController {
     private SetmealService service;
 
     @GetMapping("/page")
-    public Result page(setmealQuery query){
+    public Result page(SetmealQuery query){
         log.info("套餐分页查询 : {}",query);
         Pages<SetmealPage> pages = service.Page(query);
         return Result.success(pages);

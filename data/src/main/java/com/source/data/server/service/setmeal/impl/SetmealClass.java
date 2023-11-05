@@ -1,7 +1,7 @@
 package com.source.data.server.service.setmeal.impl;
 
 import com.pojo.Page.Pages;
-import com.pojo.Query.setmealQuery;
+import com.pojo.Query.SetmealQuery;
 import com.pojo.category.Category;
 import com.pojo.dish.Dish;
 import com.pojo.setmeal.WEBsetmeal.*;
@@ -20,7 +20,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Service
@@ -35,7 +34,7 @@ public class SetmealClass implements SetmealService {
     private DishService dishService;
 
     @Override
-    public Pages<SetmealPage> Page(setmealQuery query) {
+    public Pages<SetmealPage> Page(SetmealQuery query) {
         Integer startPage = com.utils.PageUtils.startPage.getStartPage(query.getPage(), query.getPageSize());   // 起始页码
         query.setPage(startPage);
         Integer total = mapper.getCount();
@@ -123,5 +122,10 @@ public class SetmealClass implements SetmealService {
         }).collect(Collectors.toList());
         
         return collect;
+    }
+
+    @Override
+    public setmeal getSetmealID(Long setmealId) {
+        return mapper.SelectId(setmealId);
     }
 }

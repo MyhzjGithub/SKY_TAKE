@@ -10,7 +10,7 @@ import java.math.BigDecimal;
  *订单明细表
  */
 @Data
-public class orderDetail  implements Serializable {
+public class OrderDetail implements Serializable {
     private Long id;    // 明细id
     private String name;    // 商品名称
     private String image;   // 商品图片

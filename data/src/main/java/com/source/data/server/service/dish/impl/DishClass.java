@@ -1,7 +1,7 @@
 package com.source.data.server.service.dish.impl;
 
 import com.pojo.Page.Pages;
-import com.pojo.Query.dishQuery;
+import com.pojo.Query.DishQuery;
 import com.pojo.category.Category;
 import com.pojo.dish.Dish;
 import com.pojo.dish.DishFlavor;
@@ -21,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 菜品业务逻辑处理层
@@ -35,7 +36,7 @@ public class DishClass implements DishService {
     private CategoryService categoryService;
 
     @Override
-    public Pages<Dish_page> Pages(dishQuery page) {
+    public Pages<Dish_page> Pages(DishQuery page) {
         Integer start = startPage.getStartPage(page.getPage(), page.getPageSize()); // 起始页码
         page.setPage(start);
         Integer total = mapper.getDishCount();
@@ -59,6 +60,11 @@ public class DishClass implements DishService {
         dishPublic.setCategoryName(category.getName());
         dishPublic.setFlavors(dishFlavor);
         return dishPublic;
+    }
+
+    @Override
+    public Dish getDeclaredDishId(Long id) {
+        return mapper.getDishID(id);
     }
 
     @Override
@@ -118,13 +124,28 @@ public class DishClass implements DishService {
     }
 
     @Override
-    public List<Dish> selectCategoryId(Long categoryId) {
+    public List<Dish_public> selectCategoryId(Long categoryId) {
         List<Dish> list = mapper.getCategoryId(categoryId,DefaultStatus.ONE);   // 只返回启用状态的
-        return list;
+        List<Dish_public> collect = list.stream().map(dish -> {
+            List<DishFlavor> dishFlavors = dishFlavorService.getDishId(dish.getId());    // 获取当前菜品的口味
+            Category category = categoryService.getCategoryId(categoryId);  // 当前分类的信息
+            Dish_public dishPublic = new Dish_public();
+            dishPublic.setCategoryId(categoryId);
+            dishPublic.setCategoryName(category.getName());
+            dishPublic.setFlavors(dishFlavors);
+            BeanUtils.copyProperties(dish, dishPublic);
+            return dishPublic;
+        }).collect(Collectors.toList());
+        return collect;
     }
 
     @Override
     public Dish getDishName(String name) {
         return mapper.getDishName(name);
+    }
+
+    @Override
+    public List<Dish> selectCategoryIds(Long categoryId) {
+        return mapper.getCategoryId(categoryId, DefaultStatus.ONE);
     }
 }

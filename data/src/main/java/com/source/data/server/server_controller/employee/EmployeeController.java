@@ -2,7 +2,7 @@ package com.source.data.server.server_controller.employee;
 
 
 import com.pojo.Page.Pages;
-import com.pojo.Query.employeeQuery;
+import com.pojo.Query.EmployeeQuery;
 import com.pojo.RESULT.Result;
 import com.pojo.employee.Employee;
 import com.pojo.employee.webEmployee.*;
@@ -19,7 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 员工相关接口
+ * web端 : 员工模块
  */
 @RestController("server_EmployeeController")
 @Slf4j
@@ -61,7 +61,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/page")
-    public Result page(employeeQuery empQuery){
+    public Result page(EmployeeQuery empQuery){
         log.info("分页查询 {}",empQuery);
         Pages<Employee> page = empService.Page(empQuery);
         return Result.success(page);

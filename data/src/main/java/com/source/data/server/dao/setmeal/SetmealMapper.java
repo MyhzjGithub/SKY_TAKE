@@ -1,6 +1,6 @@
 package com.source.data.server.dao.setmeal;
 
-import com.pojo.Query.setmealQuery;
+import com.pojo.Query.SetmealQuery;
 import com.pojo.setmeal.WEBsetmeal.SetmealPage;
 import com.pojo.setmeal.setmeal;
 import com.utils.Annotation.AutoFill;
@@ -18,7 +18,7 @@ public interface SetmealMapper {
     @Select("select count(*) from setmeal")
     Integer getCount();
 
-    List<SetmealPage> Page(setmealQuery query);
+    List<SetmealPage> Page(SetmealQuery query);
 
     @AutoFill(TYPE.INSERT)
     void insertSetmeal(setmeal data);

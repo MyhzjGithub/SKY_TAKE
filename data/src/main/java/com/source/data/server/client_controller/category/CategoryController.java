@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-
+/**
+ * app端 : 分类模块
+ */
 @RestController("client-CategoryController")
 @Slf4j
 @RequestMapping("/user/category")

@@ -8,7 +8,7 @@ import lombok.ToString;
  */
 @Data
 @ToString
-public class categoryQuery {
+public class CategoryQuery {
     private String name;    // 名称
     private Integer page;   // 页码
     private Integer pageSize;   // 显示数据量

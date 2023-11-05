@@ -17,6 +17,5 @@ public class DishFlavor  implements Serializable {
     private Long id;
     private Long dishId;
     private String name;
-    @JsonProperty("value")  // 实体映射 将value元素映射到value_data数据上
-    private String value_data;  // value是数据库关键字
+    private String value;  // value是数据库关键字
 }

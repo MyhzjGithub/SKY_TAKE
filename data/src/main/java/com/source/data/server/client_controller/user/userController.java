@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 import java.util.Map;
-
+/**
+ * app端 : 用户详情模块
+ */
 @RestController("client-userController")
 @Slf4j
 @RequestMapping("/user/user")

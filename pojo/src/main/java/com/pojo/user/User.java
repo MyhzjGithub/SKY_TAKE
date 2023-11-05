@@ -1,13 +1,12 @@
 package com.pojo.user;
 
 import lombok.Data;
+import lombok.ToString;
 
 import java.time.LocalDateTime;
 
-/**
- * 用户信息实体类
- */
 @Data
+@ToString
 public class User {
     private Long id;
     private String openid;

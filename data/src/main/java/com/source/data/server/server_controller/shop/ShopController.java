@@ -6,7 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * 店铺控制层
+ * web端 : 店铺营业模块
  */
 @RestController("server_ShopController")
 @Slf4j

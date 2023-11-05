@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 @Data
 @ToString
-public class setmealQuery implements Serializable {
+public class SetmealQuery implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
     private Long categoryId;    // 分类名称

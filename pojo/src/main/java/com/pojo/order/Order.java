@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
  * 订单管理类
  */
 @Data
-public class order  implements Serializable {
+public class Order implements Serializable {
     private Long id;    // 订单id
     private String number;  // 订单号
     private Integer status; // 订单状态

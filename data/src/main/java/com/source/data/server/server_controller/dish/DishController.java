@@ -1,7 +1,7 @@
 package com.source.data.server.server_controller.dish;
 
 import com.pojo.Page.Pages;
-import com.pojo.Query.dishQuery;
+import com.pojo.Query.DishQuery;
 import com.pojo.RESULT.Result;
 import com.pojo.dish.Dish;
 import com.pojo.dish.WEBdish.Dish_page;
@@ -18,7 +18,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * 菜品控制层
+ * web端 : 菜品模块
  */
 @RestController("server_DishController")
 @Slf4j
@@ -28,7 +28,7 @@ public class DishController {
     private DishService service;
 
     @GetMapping("/page")
-    public Result page(dishQuery page){
+    public Result page(DishQuery page){
         log.info("分页查询菜品 : {}",page);
         Pages<Dish_page> dishPagePages = service.Pages(page);
         return Result.success(dishPagePages);
@@ -76,7 +76,7 @@ public class DishController {
     @Cacheable(value = "server-DishCache" , key = "#categoryId")    // 添加查询缓存
     public Result selectCategoryIdGetDish(Long categoryId){
         log.info("查询分类id为: {}的菜品数据",categoryId);
-        List<Dish> list = service.selectCategoryId(categoryId);
+        List<Dish> list = service.selectCategoryIds(categoryId);
         return Result.success(list);
     }
 }
