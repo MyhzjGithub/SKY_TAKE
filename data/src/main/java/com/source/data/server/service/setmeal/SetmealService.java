@@ -1,7 +1,7 @@
 package com.source.data.server.service.setmeal;
 
 import com.pojo.Page.Pages;
-import com.pojo.Query.setmealQuery;
+import com.pojo.Query.SetmealQuery;
 import com.pojo.setmeal.WEBsetmeal.*;
 import com.pojo.setmeal.setmeal;
 
@@ -13,7 +13,7 @@ public interface SetmealService {
      * @param query
      * @return
      */
-    Pages<SetmealPage> Page(setmealQuery query);
+    Pages<SetmealPage> Page(SetmealQuery query);
 
     /**
      * 新增套餐数据
@@ -60,4 +60,11 @@ public interface SetmealService {
      * @return
      */
     List<Setmeal_data> selectDishID(Long setmealId);
+
+    /**
+     * 根据套餐id获取套餐信息
+     * @param setmealId
+     * @return
+     */
+    setmeal getSetmealID(Long setmealId);
 }

@@ -11,7 +11,7 @@ import java.io.Serializable;
  */
 @Data
 @ToString
-public class dishQuery implements Serializable {
+public class DishQuery implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
     private Long categoryId;    // 分类名称

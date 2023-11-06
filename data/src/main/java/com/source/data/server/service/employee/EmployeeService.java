@@ -2,7 +2,7 @@ package com.source.data.server.service.employee;
 
 
 import com.pojo.Page.Pages;
-import com.pojo.Query.employeeQuery;
+import com.pojo.Query.EmployeeQuery;
 import com.pojo.employee.Employee;
 import com.pojo.employee.webEmployee.Empinsert;
 import com.pojo.employee.webEmployee.EmployeeLogin;
@@ -23,7 +23,7 @@ public interface EmployeeService {
     /**
      * 分页查询
      */
-    Pages<Employee> Page(employeeQuery empQuery);
+    Pages<Employee> Page(EmployeeQuery empQuery);
 
     /**
      * 根据id查询员工信息

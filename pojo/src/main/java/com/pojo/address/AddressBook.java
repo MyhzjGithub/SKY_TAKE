@@ -6,11 +6,11 @@ import lombok.Data;
  * 地址类
  */
 @Data
-public class addressBook {
-    private Long id;
-    private Long userId;
-    private String consignee;
-    private String sex;
+public class AddressBook {
+    private Long id;    // 主键id
+    private Long userId;    // 用户id
+    private String consignee;   // 收货人
+    private String sex;     // 性别
     private String phone;
     private String provinceCode;    // 省级区划分编号
     private String provinceName;    // 省级名称

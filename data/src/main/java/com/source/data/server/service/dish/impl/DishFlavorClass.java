@@ -18,8 +18,8 @@ public class DishFlavorClass implements DishFlavorService {
     private DishFlavorMapper mapper;
 
     @Override
-    public List<DishFlavor> getDishId(Long id) {
-        return mapper.getDishId(id);
+    public List<DishFlavor> getDishId(Long dishId) {
+        return mapper.getDishId(dishId);
     }
 
     /**

@@ -1,6 +1,6 @@
 package com.source.data.server.dao.dish;
 
-import com.pojo.Query.dishQuery;
+import com.pojo.Query.DishQuery;
 import com.pojo.dish.Dish;
 import com.pojo.dish.WEBdish.Dish_page;
 import com.pojo.dish.WEBdish.Dish_public;
@@ -21,7 +21,7 @@ public interface DishMapper {
     Integer getDishCount();
 
 
-    List<Dish_page> Pages(dishQuery page);
+    List<Dish_page> Pages(DishQuery page);
 
     @Select("select id, name, category_id, price, image, description, " +
             "status, create_time, update_time, create_user, update_user " +

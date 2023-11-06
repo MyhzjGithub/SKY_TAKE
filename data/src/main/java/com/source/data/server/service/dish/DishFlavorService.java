@@ -9,7 +9,7 @@ public interface DishFlavorService {
      * 根据菜品id查询对应的口味信息
      * @return
      */
-    List<DishFlavor> getDishId(Long id);
+    List<DishFlavor> getDishId(Long dishId);
 
     /**
      * 修改口味信息

@@ -6,18 +6,10 @@
     <sql id="SELECT">select id, dish_id, name, value from dish_flavor</sql>
 
 
-    <select id="getDishId" resultType="com.pojo.dish.DishFlavor">
-        <include refid="SELECT"/>
-        where dish_id = #{id}
-    </select>
-
     <insert id="insertDishFlavor">
         insert into dish_flavor (dish_id, name, value) VALUES
         <foreach collection="flavors" item="data" separator=",">
-            (#{data.dishId},#{data.name},#{data.value_data})
+            (#{data.dishId},#{data.name},#{data.value})
         </foreach>
     </insert>
-
-
-
 </mapper>

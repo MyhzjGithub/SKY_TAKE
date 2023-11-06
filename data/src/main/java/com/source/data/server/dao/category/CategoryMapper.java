@@ -1,6 +1,6 @@
 package com.source.data.server.dao.category;
 
-import com.pojo.Query.categoryQuery;
+import com.pojo.Query.CategoryQuery;
 import com.pojo.category.Category;
 import com.utils.Annotation.AutoFill;
 import com.utils.typeUtils.TYPE;
@@ -18,7 +18,7 @@ public interface CategoryMapper {
     Integer getCategoryCount();
 
 
-    List<Category> Pages(categoryQuery query);
+    List<Category> Pages(CategoryQuery query);
 
     @AutoFill(TYPE.INSERT)
     void insertCategory(Category category);

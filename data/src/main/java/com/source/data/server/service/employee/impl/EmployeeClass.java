@@ -2,7 +2,7 @@ package com.source.data.server.service.employee.impl;
 
 
 import com.pojo.Page.Pages;
-import com.pojo.Query.employeeQuery;
+import com.pojo.Query.EmployeeQuery;
 import com.pojo.employee.Employee;
 import com.pojo.employee.webEmployee.Empinsert;
 import com.pojo.employee.webEmployee.EmployeeLogin;
@@ -67,7 +67,7 @@ public class EmployeeClass implements EmployeeService {
     }
 
     @Override
-    public Pages<Employee> Page(employeeQuery empQuery) {
+    public Pages<Employee> Page(EmployeeQuery empQuery) {
         Integer count = mapper.getEmployeeCount();
         // 起始索引 = (查询页码 - 1) * 查询记录页
         Integer page = startPage.getStartPage(empQuery.getPage(), empQuery.getPageSize());

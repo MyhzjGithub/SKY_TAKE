@@ -1,7 +1,7 @@
 package com.source.data.server.service.category;
 
 import com.pojo.Page.Pages;
-import com.pojo.Query.categoryQuery;
+import com.pojo.Query.CategoryQuery;
 import com.pojo.category.WEBcategory.Catinsert;
 import com.pojo.category.Category;
 
@@ -13,7 +13,7 @@ public interface CategoryService {
      * @param query
      * @return
      */
-    Pages<Category> Pages(categoryQuery query);
+    Pages<Category> Pages(CategoryQuery query);
 
     /**
      * 新增分类

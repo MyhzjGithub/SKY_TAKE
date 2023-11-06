@@ -1,7 +1,7 @@
 package com.source.data.server.server_controller.category;
 
 import com.pojo.Page.Pages;
-import com.pojo.Query.categoryQuery;
+import com.pojo.Query.CategoryQuery;
 import com.pojo.RESULT.Result;
 import com.pojo.category.WEBcategory.Catinsert;
 import com.pojo.category.Category;
@@ -14,7 +14,7 @@ import java.util.List;
 
 
 /**
- * 分类模块管理
+ * web端 : 分类模块管理
  */
 @RestController("server_CategoryController")
 @Slf4j
@@ -24,7 +24,7 @@ public class CategoryController {
     private CategoryService service;
 
     @GetMapping("/page")
-    public Result page(categoryQuery query){
+    public Result page(CategoryQuery query){
         log.info("分页查询 : {}",query);
         Pages<Category> pages = service.Pages(query);
         return Result.success(pages);

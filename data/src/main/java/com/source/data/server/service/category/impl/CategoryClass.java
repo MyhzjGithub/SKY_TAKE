@@ -1,7 +1,7 @@
 package com.source.data.server.service.category.impl;
 
 import com.pojo.Page.Pages;
-import com.pojo.Query.categoryQuery;
+import com.pojo.Query.CategoryQuery;
 import com.pojo.category.WEBcategory.Catinsert;
 import com.pojo.category.Category;
 import com.source.data.server.dao.category.CategoryMapper;
@@ -25,7 +25,7 @@ public class CategoryClass implements CategoryService {
     private CategoryMapper mapper;
 
     @Override
-    public Pages<Category> Pages(categoryQuery query) {
+    public Pages<Category> Pages(CategoryQuery query) {
         Integer total = mapper.getCategoryCount();
         Integer Page = startPage.getStartPage(query.getPage(), query.getPageSize());   // 起始页码
         query.setPage(Page);
