@@ -12,13 +12,6 @@ spring:
   # 数据库配置
   datasource:
     username: xxx
-
-
-
-
-
-
-
     url: xxx
     type: com.alibaba.druid.pool.DruidDataSource
 #    password: 622717
