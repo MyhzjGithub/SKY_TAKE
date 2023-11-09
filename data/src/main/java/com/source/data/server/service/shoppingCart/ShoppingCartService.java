@@ -28,4 +28,11 @@ public interface ShoppingCartService {
      * 清空当前用户的购物车数据
      */
     void Delete();
+
+    /**
+     * 批量添加购物车
+     * @param shoppingCartList
+     */
+    void inserts(List<ShoppingCart> shoppingCartList);
+
 }

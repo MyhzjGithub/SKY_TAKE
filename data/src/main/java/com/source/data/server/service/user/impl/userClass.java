@@ -54,4 +54,9 @@ public class userClass implements userService {
         // 返回用户对象
         return user;
     }
+
+    @Override
+    public User getUserId(Long userId) {
+        return mapper.getUserId(userId);
+    }
 }

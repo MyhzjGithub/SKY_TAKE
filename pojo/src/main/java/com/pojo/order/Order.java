@@ -20,7 +20,7 @@ public class Order implements Serializable {
     private LocalDateTime checkoutTime; // 结账时间
     private Integer payMethod;  // 支付方式 1 微信 2 支付宝
     private Integer payStatus;  // 支付状态 0 未支付 1 已支付 2 退款
-    private BigDecimal amount;  // 实际付款金额
+    private Double amount;  // 实际付款金额
     private String remark;  // 订单备注
     private String phone;   // 用户手机号
     private String address; // 详细地址
@@ -29,7 +29,7 @@ public class Order implements Serializable {
     private String cancelReason;    // 订单取消原因
     private String rejectionReason; // 订单拒绝原因
     private LocalDateTime cancelTime;   // 订单取消时间
-    private LocalDateTime estimatedDeliveryTime;    // 预计送达时间
+    private String estimatedDeliveryTime;    // 预计送达时间
     private Integer deliveryStatus; // 配送状态 1 立即送出 0 选择具体时间
     private LocalDateTime deliveryTime; // 送达时间
     private Integer packAmount; // 打包费

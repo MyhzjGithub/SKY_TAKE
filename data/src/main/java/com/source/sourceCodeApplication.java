@@ -11,11 +11,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @ComponentScan(basePackages = {"com.source", "com.utils"})	// 需要先声明主启动类下的包 在注入别的包
 @EnableCaching	// 开启注解缓存功能
 public class sourceCodeApplication {
-
 	public static void main(String[] args) {
 		SpringApplication.run(sourceCodeApplication.class, args);
 	}
-
-
-
 }

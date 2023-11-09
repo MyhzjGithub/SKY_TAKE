@@ -10,4 +10,11 @@ public interface userService {
      * @return
      */
     User getUser(userCode code);
+
+    /**
+     * 根据用户id查询用户详细
+     * @param userId
+     * @return
+     */
+    User getUserId(Long userId);
 }

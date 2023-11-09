@@ -3,6 +3,7 @@ package com.source.ExceptionHandler;
 import com.pojo.RESULT.Result;
 import com.utils.ErrorUtils.Message;
 import com.utils.ExceptionUtils.NullUserException;
+import com.utils.ExceptionUtils.OrderException;
 import com.utils.ExceptionUtils.PasswordException;
 import com.utils.ExceptionUtils.UsernameException;
 import lombok.extern.slf4j.Slf4j;
@@ -42,6 +43,13 @@ public class My_ExceptionHandler {
     public Result Login(LoginException e){
         String message = e.getMessage();    // 获取错误信息
         log.info("捕获到: LoginException异常  异常信息为 : {}",message);
+        return Result.error(message);
+    }
+
+    @ExceptionHandler(OrderException.class)
+    public Result Order(OrderException e){
+        String message = e.getMessage();    // 获取错误信息
+        log.info("捕获到: OrderException异常  异常信息为 : {}",message);
         return Result.error(message);
     }
 

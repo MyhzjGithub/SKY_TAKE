@@ -111,6 +111,11 @@ public class ShoppingCartClass implements ShoppingCartService {
         mapper.DeleteShoppingCarts(BeanThread.getCurrentId());
     }
 
+    @Override
+    public void inserts(List<ShoppingCart> shoppingCartList) {
+        mapper.inserts(shoppingCartList);
+    }
+
     /**
      * 判断当前购物车中份数是否小于等于1 减一之后为0直接清空即可
      * @param shoppingCart
