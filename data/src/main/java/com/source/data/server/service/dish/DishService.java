@@ -81,4 +81,11 @@ public interface DishService {
      * @return
      */
     List<Dish> selectCategoryIds(Long categoryId);
+
+    /**
+     * 获取指定状态的菜品数量
+     * @param status
+     * @return
+     */
+    Integer selectStatus(Integer status);
 }

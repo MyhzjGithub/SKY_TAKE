@@ -16,13 +16,43 @@
     </insert>
 
 
-    <select id="Page" resultType="com.pojo.order.Order">
+    <select id="PageClient" resultType="com.pojo.order.Order">
         <include refid="SELECT"/>
         <where>
             <if test="userId != null">user_id = #{userId}</if>
             <if test="status != null">and status = #{status}</if>
         </where>
         order by order_time desc limit #{page},#{pageSize}
+    </select>
+
+    <select id="PageServer" resultType="com.pojo.order.Order">
+        <include refid="SELECT"/>
+        <where>
+            <if test="number != null">number like concat('%',#{number},'%')</if>
+            <if test="status != null">and status = #{status}</if>
+            <if test="phone != null">and phone = #{phone}</if>
+            <if test="beginTime != null and endTime != null">and order_time between  #{beginTime} and  #{endTime}</if>
+        </where>
+        order by order_time desc limit #{page},#{pageSize}
+    </select>
+    <select id="count" resultType="java.lang.Integer">
+       select count(*) from orders
+        <where>
+            <if test="userId != null">user_id = #{userId}</if>
+        </where>
+    </select>
+    <select id="getDeclaredValidOrderCount" resultType="java.lang.Integer">
+        select count(*) from orders
+        <where>
+                <if test="bight != null and end != null">checkout_time between #{bight} and #{end}</if>
+                <if test="status!= null">and status = #{status}</if>
+        </where>
+    </select>
+    <select id="selectStatus" resultType="java.lang.Integer">
+        select count(*) from orders
+        <where>
+            <if test="status != null">status = #{status}</if>
+        </where>
     </select>
 
     <update id="update">

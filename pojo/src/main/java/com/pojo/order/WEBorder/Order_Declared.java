@@ -6,8 +6,9 @@ import lombok.Data;
 import lombok.ToString;
 
 import java.util.List;
+
 @Data
 @ToString
-public class Order_page extends Order {
+public class Order_Declared extends Order {
     private List<OrderDetail> orderDetailList;
 }

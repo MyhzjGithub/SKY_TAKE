@@ -2,14 +2,13 @@ package com.source.data.server.service.order.impl;
 
 import com.alibaba.fastjson.JSONObject;
 import com.pojo.Page.Pages;
-import com.pojo.Query.OrderQuery;
+import com.pojo.Query.OrderClientQuery;
+import com.pojo.Query.OrderServerQuery;
 import com.pojo.address.AddressBook;
 import com.pojo.dish.Dish;
 import com.pojo.order.Order;
 import com.pojo.order.OrderDetail;
-import com.pojo.order.WEBorder.Order_message;
-import com.pojo.order.WEBorder.Order_page;
-import com.pojo.order.WEBorder.Order_submit;
+import com.pojo.order.WEBorder.*;
 import com.pojo.setmeal.setmeal;
 import com.pojo.shopping.ShoppingCart;
 import com.pojo.user.User;
@@ -33,8 +32,11 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.util.*;
+
 
 @Service
 public class OrderClass implements OrderService {
@@ -83,7 +85,7 @@ public class OrderClass implements OrderService {
         order.setPayStatus(orderPayStatus.ZERO);    // 支付状态 当前属于未支付
         order.setAmount(orderSubmit.getAmount()); // 付款金额
         order.setRemark(orderSubmit.getRemark());   // 订单备注
-        order.setPhone(user.getPhone());    // 用户手机号
+        order.setPhone(addressBook.getPhone());    // 用户手机号
         order.setAddress(addressBook.getDetail());  // 详细地址
         order.setUserName(user.getName());  // 用户名称
         order.setConsignee(addressBook.getConsignee()); // 收货人
@@ -126,13 +128,13 @@ public class OrderClass implements OrderService {
     }
 
     @Override
-    public Pages<Order_page> selectOrders(OrderQuery query) {
+    public Pages<OrderClient_page> selectOrders(OrderClientQuery query) {
         query.setPage(startPage.getStartPage(query.getPage(), query.getPageSize()));    // 设置其实页码
         query.setUserId(BeanThread.getCurrentId());
-        Integer total = mapper.count();
-        List<Order> orderList = mapper.Page(query);
-        List<Order_page> orderPages = orderList.stream().map(order -> {
-            Order_page orderPage = new Order_page();
+        Integer total = mapper.count(query.getUserId());
+        List<Order> orderList = mapper.PageClient(query);
+        List<OrderClient_page> orderPages = orderList.stream().map(order -> {
+            OrderClient_page orderPage = new OrderClient_page();
             BeanUtils.copyProperties(order, orderPage);
             List<OrderDetail> orderDetailList = detailService.getOrderId(order.getId());
             orderPage.setOrderDetailList(orderDetailList);
@@ -142,10 +144,10 @@ public class OrderClass implements OrderService {
     }
 
     @Override
-    public Order_page selectOrderID(Long id) {
+    public OrderClient_page selectOrderID(Long id) {
         Order order = mapper.selectId(id);
         List<OrderDetail> details = detailService.getOrderId(order.getId());
-        Order_page orderPage = new Order_page();
+        OrderClient_page orderPage = new OrderClient_page();
         BeanUtils.copyProperties(order, orderPage);
         orderPage.setOrderDetailList(details);
         return orderPage;
@@ -223,6 +225,136 @@ public class OrderClass implements OrderService {
         }).toList();
 
         shoppingCartService.inserts(shoppingCartList);
+    }
+
+    @Override
+    public Pages<OrderServer_page> selectPage(OrderServerQuery page) {
+        Integer startPages = startPage.getStartPage(page.getPage(), page.getPageSize()); // 起始页码
+        page.setPage(startPages);
+        Integer total = mapper.count(null);
+        List<Order> list = mapper.PageServer(page);
+        List<OrderServer_page> orderServerPages = list.stream().map(order -> {
+            OrderServer_page orderServerPage = new OrderServer_page();
+            BeanUtils.copyProperties(order, orderServerPage);
+            List<OrderDetail> details = detailService.getOrderId(order.getId());    // 菜品明细
+            AddressBook addressBook = addressBookService.selectID(order.getAddressBookId());
+            StringBuilder sb = new StringBuilder();
+            details.forEach(orderDetail -> sb.append(orderDetail.getName()).append(" "));
+            orderServerPage.setOrderDishes(sb.toString());
+            orderServerPage.setPhone(addressBook.getPhone());
+            return orderServerPage;
+        }).toList();
+        return new Pages<>(total, orderServerPages);
+    }
+
+    @Override
+    public Order_statistics selectStatistics() {
+        // 获取待派送订单
+        Integer confirmed = mapper.statistics(orderStatus.THREE);
+        // 获取派送中订单
+        Integer deliveryInProgress = mapper.statistics(orderStatus.FOUR);
+        // 获取待接单数量
+        Integer toBeConfirmed = mapper.statistics(orderStatus.TWO);
+        return new Order_statistics(confirmed,deliveryInProgress,toBeConfirmed);
+
+    }
+
+    @Override
+    public Order_Declared selectDeclaredOrder(Long id) {
+        Order order = mapper.selectId(id);
+        List<OrderDetail> details = detailService.getOrderId(order.getId());
+        Order_Declared orderDeclared = new Order_Declared();
+        BeanUtils.copyProperties(order, orderDeclared);
+        orderDeclared.setOrderDetailList(details);
+        return orderDeclared;
+    }
+
+    @Override
+    public void updateConfirmStatus(Long id) {
+        Order order = new Order();
+        order.setId(id);
+        order.setStatus(orderStatus.THREE); // 状态为已接单
+        mapper.update(order);
+    }
+
+    @Override
+    public void updateRejectionStatus(Order_updateRejection updateRejection) {
+        // TODO: 2023/11/10 需要根据支付接口 进行退款回调
+        Order order = new Order();
+        order.setRejectionReason(updateRejection.getRejectionReason()); // 添加拒绝订单的原因
+        order.setId(updateRejection.getId());
+        order.setStatus(orderStatus.SEVEN); // 状态为已退款
+        mapper.update(order);
+    }
+
+    @Override
+    public void updateCancelStatus(Order_updateCancel orderUpdateCancel) {
+        Order order = new Order();
+        order.setCancelReason(orderUpdateCancel.getCancelReason()); // 添加取消订单的原因
+        order.setCancelTime(LocalDateTime.now());   // 订单取消时间
+        order.setId(orderUpdateCancel.getId());
+        order.setStatus(orderStatus.SIX);  // 状态为已取消
+        mapper.update(order);
+    }
+
+    @Override
+    public void updateCompleteStatus(Long id) {
+        Order order = new Order();
+        order.setDeliveryTime(LocalDateTime.now()); // 添加订单完成时间
+        order.setId(id);
+        order.setStatus(orderStatus.FIVE);  // 状态为已完成
+        mapper.update(order);
+    }
+
+    @Override
+    public void updateDelivery(Long id) {
+        Order order = new Order();
+        order.setId(id);
+        order.setStatus(orderStatus.FOUR);  // 状态为派送中
+        mapper.update(order);
+    }
+
+    @Override
+    public Double getDeclaredOrderCompletionRate(LocalDateTime bight, LocalDateTime end) {
+        // 当天的有效订单数量
+        Integer declaredvalidOrderCount = getDeclaredValidOrderCount(bight, end);
+        // 当天全部订单数量
+        Integer orderCount = mapper.getDeclaredValidOrderCount(bight, end, null);
+        if (orderCount == 0 || declaredvalidOrderCount == 0){
+            return 0.0;     // 没有任何订单 设置为0.0
+        }
+        // 计算订单完成率
+        Double completionRate = ((double) declaredvalidOrderCount / orderCount) * 100;
+        return completionRate;
+    }
+
+    @Override
+    public Integer getDeclaredValidOrderCount(LocalDateTime bight, LocalDateTime end) {
+        return mapper.getDeclaredValidOrderCount(bight,end,orderStatus.FIVE);
+    }
+
+    @Override
+    public Double getDeclaredTurnover(LocalDateTime bight, LocalDateTime end) {
+        // 获取当日订单的全部有效订单金额累加
+        Double turnover = mapper.getDeclaredTurnover(bight, end, orderStatus.FIVE);
+        return turnover == null ? 0.0 : turnover;
+    }
+
+    @Override
+    public Double getDeclaredUnitPrice(LocalDateTime bight, LocalDateTime end) {
+        Integer declaredvalidOrderCount = getDeclaredValidOrderCount(bight, end);   // 当日的有效订单数量
+        Double turnover = getDeclaredTurnover(bight, end);  // 当日的交易总金额
+        if (turnover == 0.0){
+            return 0.0;
+        }
+        double UnitPrice = turnover / declaredvalidOrderCount;  // 平均单价
+        UnitPrice = Double.parseDouble(new DecimalFormat("#.##").format(UnitPrice));    // 保留两位小数展示
+        return UnitPrice;
+    }
+
+    @Override
+    public Integer selectStatus(Integer status) {
+        return mapper.selectStatus(status);
     }
 
     private static Integer getMinutes(String s){

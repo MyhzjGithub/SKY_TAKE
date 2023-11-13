@@ -1,17 +1,17 @@
 package com.source.data.server.client_controller.order;
 
 import com.pojo.Page.Pages;
-import com.pojo.Query.OrderQuery;
+import com.pojo.Query.OrderClientQuery;
 import com.pojo.RESULT.Result;
 import com.pojo.order.WEBorder.Order_message;
-import com.pojo.order.WEBorder.Order_page;
+import com.pojo.order.WEBorder.OrderClient_page;
 import com.pojo.order.WEBorder.Order_submit;
 import com.source.data.server.service.order.OrderService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
+@RestController("client-OrderController")
 @Slf4j
 @RequestMapping("/user/order")
 public class OrderController {
@@ -26,16 +26,16 @@ public class OrderController {
     }
 
     @GetMapping("/historyOrders")
-    public Result historyOrders(OrderQuery query){
+    public Result historyOrders(OrderClientQuery query){
         log.info("查询当前用户的历史订单");
-        Pages<Order_page> pages = service.selectOrders(query);
+        Pages<OrderClient_page> pages = service.selectOrders(query);
         return Result.success(pages);
     }
 
     @GetMapping("/orderDetail/{id}")
     public Result getOrderID(@PathVariable("id") Long id){
         log.info("查单id为:{} 的订单信息",id);
-        Order_page orderPage = service.selectOrderID(id);
+        OrderClient_page orderPage = service.selectOrderID(id);
         return Result.success(orderPage);
     }
 

@@ -128,4 +128,9 @@ public class SetmealClass implements SetmealService {
     public setmeal getSetmealID(Long setmealId) {
         return mapper.SelectId(setmealId);
     }
+
+    @Override
+    public Integer selectStatus(Integer status) {
+        return mapper.selectStatus(status);
+    }
 }

@@ -148,4 +148,9 @@ public class DishClass implements DishService {
     public List<Dish> selectCategoryIds(Long categoryId) {
         return mapper.getCategoryId(categoryId, DefaultStatus.ONE);
     }
+
+    @Override
+    public Integer selectStatus(Integer status) {
+        return mapper.selectStatus(status);
+    }
 }

@@ -1,58 +1,57 @@
-server:
-  port: 8080
-# mybatis日志配置
-mybatis:
-  configuration:
-    # 日志显示
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-    # 驼峰命名
-    map-underscore-to-camel-case: true
-    # data/server/dao/
-spring:
-  # 数据库配置
-  datasource:
-    username: xxx
-    url: xxx
-    type: com.alibaba.druid.pool.DruidDataSource
-#    password: 622717
-    password: xxx
-  cache:
-    type: redis   # 指定redis作为缓存
-  # 配置rides缓存
-  data:
-    redis:
-      port: xxx
-      database: 0
-      host: xxx
-      connect-timeout: xxx
-# 配置阿里云oss文件上传
-aliyun:
-  oss:
-    endpoint: xxx
-    accessKeyId: xxx
-    accessKeySecret: xxx
-    bucketName: xxx
-#jwt令牌有效时间
-jwt:
-  # server 服务端
-  # 设置jwt过期时间
-  server_time: xxx
-  # 设置jwt签名加密时使用的秘钥
-  server_PasswordKey: xxx
-  # 设置前端传递过来的令牌名称
-  server_token: token
-
-  # client 客户端
-  # 设置jwt过期时间
-  client_time: xxx
-  # 设置jwt签名加密时使用的秘钥
-  client_PasswordKey: xxx
-  # 设置前端传递过来的令牌名称
-  client_token: authentication
-# 微信小程序 配置
-wx:
-  AppID: xxx # 小程序appid
-  Secret: xxx  # 小程序密钥
-
+#server:
+#  port: 8080
+## mybatis日志配置
+#mybatis:
+#  configuration:
+#    # 日志显示
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#    # 驼峰命名
+#    map-underscore-to-camel-case: true
+#    # data/server/dao/
+#spring:
+#  # 数据库配置
+#  datasource:
+#    username: xxx
+#    url: xxx
+#    type: com.alibaba.druid.pool.DruidDataSource
+##    password: 622717
+#    password: xxx
+#  cache:
+#    type: redis   # 指定redis作为缓存
+#  # 配置rides缓存
+#  data:
+#    redis:
+#      port: xxx
+#      database: 0
+#      host: xxx
+#      connect-timeout: xxx
+## 配置阿里云oss文件上传
+#aliyun:
+#  oss:
+#    endpoint: xxx
+#    accessKeyId: xxx
+#    accessKeySecret: xxx
+#    bucketName: xxx
+##jwt令牌有效时间
+#jwt:
+#  # server 服务端
+#  # 设置jwt过期时间
+#  server_time: xxx
+#  # 设置jwt签名加密时使用的秘钥
+#  server_PasswordKey: xxx
+#  # 设置前端传递过来的令牌名称
+#  server_token: token
+#
+#  # client 客户端
+#  # 设置jwt过期时间
+#  client_time: xxx
+#  # 设置jwt签名加密时使用的秘钥
+#  client_PasswordKey: xxx
+#  # 设置前端传递过来的令牌名称
+#  client_token: authentication
+## 微信小程序 配置
+#wx:
+#  AppID: xxx # 小程序appid
+#  Secret: xxx  # 小程序密钥
 
 

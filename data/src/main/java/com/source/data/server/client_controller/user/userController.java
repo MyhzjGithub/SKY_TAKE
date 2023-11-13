@@ -1,6 +1,5 @@
 package com.source.data.server.client_controller.user;
 
-import com.alibaba.druid.sql.ast.statement.SQLForeignKeyImpl;
 import com.pojo.RESULT.Result;
 import com.pojo.user.Client.USER;
 import com.pojo.user.Client.userCode;

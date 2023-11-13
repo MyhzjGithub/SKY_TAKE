@@ -67,4 +67,11 @@ public interface SetmealService {
      * @return
      */
     setmeal getSetmealID(Long setmealId);
+
+    /**
+     * 查询指定状态的套餐数量
+     * @param status
+     * @return
+     */
+    Integer selectStatus(Integer status);
 }

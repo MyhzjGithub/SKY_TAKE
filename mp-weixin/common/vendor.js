@@ -20506,8 +20506,9 @@ function createAnimation(option, _this) {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });exports.baseUrl = void 0;
 
-var baseUrl = 'http://192.168.1.105:8080';//请求nginx，由nginx将请求转发到后端服务
-var baseUrl11 = 'http://localhost:8080';
+ var baseUrl = 'http://192.168.1.110:8080';//请求nginx，由nginx将请求转发到后端服务
+// var baseUrl = 'http://192.168.1.71:8080';
+// var baseUrl = 'http://localhost:8080';
 
 exports.baseUrl = baseUrl;
 

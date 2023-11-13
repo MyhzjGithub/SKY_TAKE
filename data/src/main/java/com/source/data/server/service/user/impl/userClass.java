@@ -9,7 +9,6 @@ import com.source.data.server.service.user.userService;
 import com.utils.ErrorUtils.Message;
 import com.utils.ExceptionUtils.LoginException;
 import com.utils.HttpClientUtils.HttpClientUtil;
-import com.utils.JwtUtils.applicationConfigProperties.JwtProperties;
 import com.utils.WEUtils.weixinGetValue;
 import com.utils.WEUtils.weixinProperties;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,5 +57,10 @@ public class userClass implements userService {
     @Override
     public User getUserId(Long userId) {
         return mapper.getUserId(userId);
+    }
+
+    @Override
+    public Integer getDeclareduser(LocalDateTime bight, LocalDateTime end) {
+        return mapper.getDeclareduser(bight,end);
     }
 }

@@ -4,10 +4,8 @@ import com.pojo.RESULT.Result;
 import com.pojo.shopping.Client.ShoppingCartadd;
 import com.pojo.shopping.ShoppingCart;
 import com.source.data.server.service.shoppingCart.ShoppingCartService;
-import com.utils.ThreadUtils.BeanThread;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

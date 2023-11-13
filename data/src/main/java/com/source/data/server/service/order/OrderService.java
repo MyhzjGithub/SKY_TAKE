@@ -1,10 +1,11 @@
 package com.source.data.server.service.order;
 
 import com.pojo.Page.Pages;
-import com.pojo.Query.OrderQuery;
-import com.pojo.order.WEBorder.Order_message;
-import com.pojo.order.WEBorder.Order_page;
-import com.pojo.order.WEBorder.Order_submit;
+import com.pojo.Query.OrderClientQuery;
+import com.pojo.Query.OrderServerQuery;
+import com.pojo.order.WEBorder.*;
+
+import java.time.LocalDateTime;
 
 public interface OrderService {
     /**
@@ -19,14 +20,14 @@ public interface OrderService {
      * @param query
      * @return
      */
-    Pages<Order_page> selectOrders(OrderQuery query);
+    Pages<OrderClient_page> selectOrders(OrderClientQuery query);
 
     /**
      * 查询指定id的订单信息
      * @param id
      * @return
      */
-    Order_page selectOrderID(Long id);
+    OrderClient_page selectOrderID(Long id);
 
     /**
      * 取消指定id的订单
@@ -45,4 +46,92 @@ public interface OrderService {
      * @param id
      */
     void openOrder(Long id);
+
+    /**
+     * 客户端分页查询
+     * @param page
+     * @return
+     */
+    Pages<OrderServer_page> selectPage(OrderServerQuery page);
+
+    /**
+     * 查询订单数量统计
+     * @return
+     */
+    Order_statistics selectStatistics();
+
+    /**
+     * 查询指定id的详情
+     * @param id
+     * @return
+     */
+    Order_Declared selectDeclaredOrder(Long id);
+
+    /**
+     * 接受订单
+     *
+     * @param id
+     */
+    void updateConfirmStatus(Long id);
+
+    /**
+     * 拒接订单
+     * @param updateRejection
+     */
+    void updateRejectionStatus(Order_updateRejection updateRejection);
+
+    /**
+     * 取消订单
+     * @param orderUpdateCancel
+     */
+    void updateCancelStatus(Order_updateCancel orderUpdateCancel);
+
+    /**
+     * 完成订单
+     * @param id
+     */
+    void updateCompleteStatus(Long id);
+
+    /**
+     * 派送订单
+     * @param id
+     */
+    void updateDelivery(Long id);
+
+    /**
+     * 获取指定时间的订单完成率
+     * @param bight
+     * @param end
+     * @return
+     */
+    Double getDeclaredOrderCompletionRate(LocalDateTime bight, LocalDateTime end);
+
+    /**
+     * 获取当天有效订单数
+     * @param bight
+     * @param end
+     * @return
+     */
+    Integer getDeclaredValidOrderCount(LocalDateTime bight, LocalDateTime end);
+
+    /**
+     * 计算当日营业额
+     * @param bight
+     * @param end
+     * @return
+     */
+    Double getDeclaredTurnover(LocalDateTime bight, LocalDateTime end);
+
+    /**
+     * 计算当日平均单价
+     * @return
+     */
+    Double getDeclaredUnitPrice(LocalDateTime bight, LocalDateTime end);
+
+    /**
+     * 查询指定状态下的订单总数
+     * @return
+     */
+    Integer selectStatus(Integer status);
+
 }

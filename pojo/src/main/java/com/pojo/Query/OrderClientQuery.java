@@ -5,7 +5,7 @@ import lombok.ToString;
 
 @Data
 @ToString
-public class OrderQuery {
+public class OrderClientQuery {
     private Integer page;
     private Integer pageSize;
     private Integer status;

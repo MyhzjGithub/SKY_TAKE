@@ -6,9 +6,7 @@
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/data/pom.xml" />
-        <option value="$PROJECT_DIR$/../../Web/server/pom.xml" />
         <option value="$PROJECT_DIR$/Utils/pom.xml" />
-        <option value="$PROJECT_DIR$/../../SpinrgCloud/Project/cloud-demo/pom.xml" />
         <option value="$PROJECT_DIR$/../../算法与数据结构/algorithm/pom.xml" />
       </list>
     </option>

@@ -47,4 +47,7 @@ public interface DishMapper {
     @Select("select id, name, category_id, price, image, description, status, create_time, update_time, " +
             "create_user, update_user from dish where name = #{name}")
     Dish getDishName(String name);
+
+    @Select("select count(*) from dish where status = #{status}")
+    Integer selectStatus(Integer status);
 }
