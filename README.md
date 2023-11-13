@@ -11,6 +11,8 @@
   微信小程序信息改为自己的
   数据库改成自己的
 
-启动nginx服务器后 访问 [localhost:8080](http://localhost/#/login)http://localhost/#/login 即可访问WEB端
+启动nginx服务器后 访问 [localhost:8080]
+(http://localhost/#/login)
+http://localhost/#/login 即可访问WEB端
 小程序源码也在包中 mp-weixin
   
