@@ -34,6 +34,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.text.DecimalFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -315,35 +316,37 @@ public class OrderClass implements OrderService {
     }
 
     @Override
-    public Double getDeclaredOrderCompletionRate(LocalDateTime bight, LocalDateTime end) {
+    public Double getDeclaredOrderCompletionRate(LocalDateTime begin, LocalDateTime end) {
         // 当天的有效订单数量
-        Integer declaredvalidOrderCount = getDeclaredValidOrderCount(bight, end);
+        Integer declaredvalidOrderCount = getDeclaredValidOrderCount(begin, end);
         // 当天全部订单数量
-        Integer orderCount = mapper.getDeclaredValidOrderCount(bight, end, null);
+        Integer orderCount = mapper.getDeclaredValidOrderCount(begin, end, null);
         if (orderCount == 0 || declaredvalidOrderCount == 0){
             return 0.0;     // 没有任何订单 设置为0.0
         }
         // 计算订单完成率
-        Double completionRate = ((double) declaredvalidOrderCount / orderCount) * 100;
-        return completionRate;
+        double completionRate = (double) declaredvalidOrderCount / orderCount;
+        Double result = Math.round((completionRate) * 100) / 100.0; // 保留俩位小数
+        return result;
     }
 
     @Override
-    public Integer getDeclaredValidOrderCount(LocalDateTime bight, LocalDateTime end) {
-        return mapper.getDeclaredValidOrderCount(bight,end,orderStatus.FIVE);
+    public Integer getDeclaredValidOrderCount(LocalDateTime begin, LocalDateTime end) {
+        return mapper.getDeclaredValidOrderCount(begin,end,orderStatus.FIVE);
     }
 
     @Override
-    public Double getDeclaredTurnover(LocalDateTime bight, LocalDateTime end) {
+    public Double getDeclaredTurnover(LocalDateTime begin, LocalDateTime end) {
         // 获取当日订单的全部有效订单金额累加
-        Double turnover = mapper.getDeclaredTurnover(bight, end, orderStatus.FIVE);
+        Double turnover = mapper.getDeclaredTurnover(begin, end, orderStatus.FIVE);
         return turnover == null ? 0.0 : turnover;
     }
 
+
     @Override
-    public Double getDeclaredUnitPrice(LocalDateTime bight, LocalDateTime end) {
-        Integer declaredvalidOrderCount = getDeclaredValidOrderCount(bight, end);   // 当日的有效订单数量
-        Double turnover = getDeclaredTurnover(bight, end);  // 当日的交易总金额
+    public Double getDeclaredUnitPrice(LocalDateTime begin, LocalDateTime end) {
+        Integer declaredvalidOrderCount = getDeclaredValidOrderCount(begin, end);   // 当日的有效订单数量
+        Double turnover = getDeclaredTurnover(begin, end);  // 当日的交易总金额
         if (turnover == 0.0){
             return 0.0;
         }
@@ -355,6 +358,26 @@ public class OrderClass implements OrderService {
     @Override
     public Integer selectStatus(Integer status) {
         return mapper.selectStatus(status);
+    }
+
+    @Override
+    public Integer selectCount() {
+        return mapper.selectCount();
+    }
+
+    @Override
+    public Integer getDeclaredCount(LocalDateTime begin, LocalDateTime end) {
+        return mapper.getDeclaredCount(begin,end);
+    }
+
+    @Override
+    public Integer getDeclaredValidCount(LocalDateTime begin, LocalDateTime end) {
+        return mapper.getDeclaredValidCount(begin, end, orderStatus.FIVE);
+    }
+
+    @Override
+    public List<Order> selectOrder(LocalDateTime begins, LocalDateTime ends) {
+        return mapper.selectOrderDataTime(begins,ends);
     }
 
     private static Integer getMinutes(String s){

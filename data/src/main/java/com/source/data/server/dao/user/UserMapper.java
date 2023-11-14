@@ -18,4 +18,7 @@ public interface UserMapper {
     User getUserId(Long userId);
     @Select("select count(*) from user where create_time between #{bight} and #{end}")
     Integer getDeclareduser(LocalDateTime bight, LocalDateTime end);
+
+    @Select("select count(*) from user")
+    Integer getUserCount();
 }

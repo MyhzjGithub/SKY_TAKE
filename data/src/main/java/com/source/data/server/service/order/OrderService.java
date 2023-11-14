@@ -3,9 +3,11 @@ package com.source.data.server.service.order;
 import com.pojo.Page.Pages;
 import com.pojo.Query.OrderClientQuery;
 import com.pojo.Query.OrderServerQuery;
+import com.pojo.order.Order;
 import com.pojo.order.WEBorder.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public interface OrderService {
     /**
@@ -100,33 +102,33 @@ public interface OrderService {
 
     /**
      * 获取指定时间的订单完成率
-     * @param bight
+     * @param begin
      * @param end
      * @return
      */
-    Double getDeclaredOrderCompletionRate(LocalDateTime bight, LocalDateTime end);
+    Double getDeclaredOrderCompletionRate(LocalDateTime begin, LocalDateTime end);
 
     /**
      * 获取当天有效订单数
-     * @param bight
+     * @param begin
      * @param end
      * @return
      */
-    Integer getDeclaredValidOrderCount(LocalDateTime bight, LocalDateTime end);
+    Integer getDeclaredValidOrderCount(LocalDateTime begin, LocalDateTime end);
 
     /**
      * 计算当日营业额
-     * @param bight
+     * @param begin
      * @param end
      * @return
      */
-    Double getDeclaredTurnover(LocalDateTime bight, LocalDateTime end);
+    Double getDeclaredTurnover(LocalDateTime begin, LocalDateTime end);
 
     /**
      * 计算当日平均单价
      * @return
      */
-    Double getDeclaredUnitPrice(LocalDateTime bight, LocalDateTime end);
+    Double getDeclaredUnitPrice(LocalDateTime begin, LocalDateTime end);
 
     /**
      * 查询指定状态下的订单总数
@@ -134,4 +136,33 @@ public interface OrderService {
      */
     Integer selectStatus(Integer status);
 
+    /**
+     * 查询订单总数
+     * @return
+     */
+    Integer selectCount();
+
+    /**
+     * 获取当天订单总数
+     * @param begin
+     * @param end
+     * @return
+     */
+    Integer getDeclaredCount(LocalDateTime begin, LocalDateTime end);
+
+    /**
+     * 获取指定日期内有效订单数
+     * @param begin
+     * @param end
+     * @return
+     */
+    Integer getDeclaredValidCount(LocalDateTime begin, LocalDateTime end);
+
+    /**
+     * 获取指定日期之间的全部订单
+     * @param begins
+     * @param ends
+     * @return
+     */
+    List<Order> selectOrder(LocalDateTime begins, LocalDateTime ends);
 }

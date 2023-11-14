@@ -26,4 +26,9 @@ public interface userService {
      */
     Integer getDeclareduser(LocalDateTime bight, LocalDateTime end);
 
+    /**
+     * 用户总数统计
+     * @return
+     */
+    Integer getUserCount();
 }

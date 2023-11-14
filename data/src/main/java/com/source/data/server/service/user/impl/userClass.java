@@ -63,4 +63,9 @@ public class userClass implements userService {
     public Integer getDeclareduser(LocalDateTime bight, LocalDateTime end) {
         return mapper.getDeclareduser(bight,end);
     }
+
+    @Override
+    public Integer getUserCount() {
+        return mapper.getUserCount();
+    }
 }
